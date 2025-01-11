@@ -29,5 +29,4 @@ public class ProductController {
     public List<Products> getAlProducts(){
         return new ArrayList<>();
     }
-
 }

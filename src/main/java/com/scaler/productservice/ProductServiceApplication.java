@@ -8,10 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProductServiceApplication {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(ProductServiceApplication.class, args);
-		Products product = new Products();
-		product.setTitle("iphone 15 pro");
-	}
 
+		// Example usage
+		Products product = new Products();
+		product.setTitle("iPhone 15 Pro");
+		product.setPrice(1299.99);
+		System.out.println("Product: " + product.getTitle() + ", Price: $" + product.getPrice());
+	}
 }
