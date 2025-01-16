@@ -1,7 +1,10 @@
 package com.scaler.productservice.controllers;
 
+import com.scaler.productservice.exceptions.ProductNotFoundException;
 import com.scaler.productservice.models.Products;
 import com.scaler.productservice.services.ProductServices;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,8 +22,22 @@ public class ProductController {
 
     //https://localhost:8080/products/10
     @GetMapping("/{id}")
-    public Products getProductid(@PathVariable("id") Long id){
-        return productServices.getSingleProduct(id);
+    public ResponseEntity<Products> getProductid(@PathVariable("id") Long id) throws ProductNotFoundException {
+       // throw new RuntimeException("YOUR DEFINED RUNTIME EXCEPTION");try{
+        ResponseEntity<Products> responseEntity = null;
+//        try{
+//            Products product = productServices.getSingleProduct(id);
+//            responseEntity= new ResponseEntity<>(
+//                    product, HttpStatus.OK);
+//        }
+//        catch(RuntimeException e){
+//            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+        responseEntity = new ResponseEntity<>(
+                productServices.getSingleProduct(id),
+                HttpStatus.OK
+        );
+        return responseEntity;
     }
     @GetMapping()
     public List<Products> getAlProducts(){
@@ -39,5 +56,5 @@ public class ProductController {
     public Products replaceProduct(@PathVariable("id") Long id, @RequestBody Products product){
         return null;
     }
-
-}
+//
+    }
