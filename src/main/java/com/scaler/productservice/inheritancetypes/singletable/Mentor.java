@@ -1,5 +1,10 @@
-package com.scaler.productservice.inheritancetypes.joinedtables;
+package com.scaler.productservice.inheritancetypes.singletable;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value = "2")
 public class Mentor extends User {
     private String company;
 

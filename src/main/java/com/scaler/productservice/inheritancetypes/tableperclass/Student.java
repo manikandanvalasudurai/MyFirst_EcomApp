@@ -1,6 +1,9 @@
-package com.scaler.productservice.inheritancetypes.joinedtables;
+package com.scaler.productservice.inheritancetypes.tableperclass;
 
-public class Student extends User{
+import jakarta.persistence.Entity;
+
+@Entity(name = "tbc_students")
+public class Student extends User {
     private String batch;
 
     public String getBatch() {

@@ -1,6 +1,9 @@
-package com.scaler.productservice.inheritancetypes.joinedtables;
+package com.scaler.productservice.inheritancetypes.tableperclass;
 
-public class Instructor extends User{
+import jakarta.persistence.Entity;
+
+@Entity(name = "tbc_instructors")
+public class Instructor extends User {
     private String Subject;
 
     public String getSubject() {

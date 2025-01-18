@@ -1,6 +1,11 @@
-package com.scaler.productservice.inheritancetypes.joinedtables;
+package com.scaler.productservice.inheritancetypes.singletable;
 
-public class Instructor extends User{
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value = "3")
+public class Instructor extends User {
     private String Subject;
 
     public String getSubject() {

@@ -1,6 +1,11 @@
-package com.scaler.productservice.inheritancetypes.joinedtables;
+package com.scaler.productservice.inheritancetypes.singletable;
 
-public class Student extends User{
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value = "1")
+public class Student extends User {
     private String batch;
 
     public String getBatch() {

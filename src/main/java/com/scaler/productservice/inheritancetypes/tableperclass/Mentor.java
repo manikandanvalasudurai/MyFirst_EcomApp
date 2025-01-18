@@ -1,5 +1,8 @@
-package com.scaler.productservice.inheritancetypes.joinedtables;
+package com.scaler.productservice.inheritancetypes.tableperclass;
 
+import jakarta.persistence.Entity;
+
+@Entity(name = "tbc_mentors")
 public class Mentor extends User {
     private String company;
 

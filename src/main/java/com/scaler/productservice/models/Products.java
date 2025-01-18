@@ -1,8 +1,14 @@
 package com.scaler.productservice.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+
+@Entity
+
 public class Products extends BaseModel {
     private String title;
     private double price;
+    @ManyToOne
     private Category category;
 
     public String getTitle() {
