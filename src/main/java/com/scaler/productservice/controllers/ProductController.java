@@ -3,6 +3,7 @@ package com.scaler.productservice.controllers;
 import com.scaler.productservice.exceptions.ProductNotFoundException;
 import com.scaler.productservice.models.Products;
 import com.scaler.productservice.services.ProductServices;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class ProductController {
 
     private ProductServices productServices;
 
-    public ProductController(ProductServices productServices) {
+    public ProductController(@Qualifier("selfProductService") ProductServices productServices) {
         this.productServices = productServices;
     }
 
@@ -43,8 +44,9 @@ public class ProductController {
     public List<Products> getAlProducts(){
         return productServices.getAllProducts();
     }
-
-    public void deleteProduct(Long id){
+    @DeleteMapping ("/{id}")
+    public void deleteProduct(@PathVariable("id") Long ProductId){
+        productServices.deleteProduct(ProductId);
 
     }
     //PATCH -> Partial update kind of Replace
@@ -55,6 +57,10 @@ public class ProductController {
     @PutMapping("{id}")
     public Products replaceProduct(@PathVariable("id") Long id, @RequestBody Products product){
         return null;
+    }
+    @PostMapping()
+    public Products addnewProduct(@RequestBody Products product){
+        return productServices.addProduct(product);
     }
 //
     }
