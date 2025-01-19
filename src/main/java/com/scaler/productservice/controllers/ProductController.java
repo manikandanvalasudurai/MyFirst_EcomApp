@@ -24,7 +24,7 @@ public class ProductController {
     //https://localhost:8080/products/10
     @GetMapping("/{id}")
     public ResponseEntity<Products> getProductid(@PathVariable("id") Long id) throws ProductNotFoundException {
-       // throw new RuntimeException("YOUR DEFINED RUNTIME EXCEPTION");try{
+        // throw new RuntimeException("YOUR DEFINED RUNTIME EXCEPTION");try{
         ResponseEntity<Products> responseEntity = null;
 //        try{
 //            Products product = productServices.getSingleProduct(id);
@@ -40,27 +40,31 @@ public class ProductController {
         );
         return responseEntity;
     }
+
     @GetMapping()
-    public List<Products> getAlProducts(){
+    public List<Products> getAlProducts() {
         return productServices.getAllProducts();
     }
-    @DeleteMapping ("/{id}")
-    public void deleteProduct(@PathVariable("id") Long ProductId){
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable("id") Long ProductId) {
         productServices.deleteProduct(ProductId);
 
     }
+
     //PATCH -> Partial update kind of Replace
     @PatchMapping("/{id}")
-    public Products updateProduct(@PathVariable("id") Long id, @RequestBody Products product){
+    public Products updateProduct(@PathVariable("id") Long id, @RequestBody Products product) throws ProductNotFoundException {
         return productServices.updateProduct(id, product);
     }
+
     @PutMapping("{id}")
-    public Products replaceProduct(@PathVariable("id") Long id, @RequestBody Products product){
+    public Products replaceProduct(@PathVariable("id") Long id, @RequestBody Products product) throws ProductNotFoundException {
+        return productServices.replaceProduct(id, product);
+    }
+
+    @PostMapping()
+    public Products addnewProduct(@RequestBody Products product) {
         return null;
     }
-    @PostMapping()
-    public Products addnewProduct(@RequestBody Products product){
-        return productServices.addProduct(product);
-    }
-//
-    }
+}
