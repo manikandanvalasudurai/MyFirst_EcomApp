@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ProductService</name>
 	<description>ProductService</description>
+	<packaging>jar</packaging>
 	<url/>
 	<licenses>
 		<license/>
@@ -76,8 +77,12 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<version>9.1.0</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>

@@ -1,6 +1,8 @@
 package com.scaler.productservice.repositories;
 
 import com.scaler.productservice.models.Products;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.NativeQuery;
@@ -29,7 +31,7 @@ public interface ProductRepository extends JpaRepository<Products, Long> {
     Optional<Products> findById(Long id);
 
     @Override
-    List<Products> findAll();
+    Page<Products> findAll(Pageable pageable);
 
     //HQL  --> if prpoducts had 100 attributes 2 only had values 98 doesn't those are can be null --> PROJECTIONS COMES INTO PLAY
     @Query("select p.id as id,p.title as title from Products p where p.id =:x")

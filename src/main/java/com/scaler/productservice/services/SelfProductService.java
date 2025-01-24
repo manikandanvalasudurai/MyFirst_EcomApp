@@ -5,11 +5,11 @@ import com.scaler.productservice.models.Category;
 import com.scaler.productservice.models.Products;
 import com.scaler.productservice.repositories.CategoryRepository;
 import com.scaler.productservice.repositories.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service("selfProductService")
@@ -38,8 +38,10 @@ public class SelfProductService implements ProductServices {
 
     // Fetch all products
     @Override
-    public List<Products> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Products> getAllProducts(int pageNumber, int pageSize ) {
+        return productRepository.findAll(
+                PageRequest.of(pageNumber, pageSize, Sort.by("price").descending().and(Sort.by("title").ascending()))
+        );
     }
 
     // Update specific fields of an existing product (PATCH operation)
@@ -100,11 +102,11 @@ public class SelfProductService implements ProductServices {
     public Products addProduct(Products product) {
         Category category = product.getCategory();
 
-        if (category.getId() == null) {
-            // Save the new category in the database
-            category = categoryRepository.save(category);
-            product.setCategory(category);
-        }
+//        if (category.getId() == null) {
+//            // Save the new category in the database
+//            category = categoryRepository.save(category);
+//            product.setCategory(category);
+//        } can be handled with in product class it self using @ManyToOne(cascade = CascadeType.PERSIST)
 
         return productRepository.save(product);
     }

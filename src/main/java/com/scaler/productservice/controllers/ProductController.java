@@ -4,6 +4,7 @@ import com.scaler.productservice.exceptions.ProductNotFoundException;
 import com.scaler.productservice.models.Products;
 import com.scaler.productservice.services.ProductServices;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,8 @@ public class ProductController {
     }
 
     @GetMapping()
-    public List<Products> getAlProducts() {
-        return productServices.getAllProducts();
+    public Page<Products> getAlProducts(@RequestParam("pageNumber")int pageNumber, @RequestParam("pageSize")int pageSize) {
+        return productServices.getAllProducts(pageNumber,pageSize);
     }
 
     @DeleteMapping("/{id}")
@@ -65,6 +66,7 @@ public class ProductController {
 
     @PostMapping()
     public Products addnewProduct(@RequestBody Products product) {
-        return null;
+        return productServices.addProduct(product);
+
     }
 }
